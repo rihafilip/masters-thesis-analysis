@@ -2,11 +2,16 @@
 
 set -e
 
+if [[ -z "$1" ]]; then
+  echo "Error: No Rsh folder supplied"
+  exit 1
+fi
+
 BENCHMARKS=$(realpath ./Benchmarks)
-RSH=$(realpath ../rir-feedback-in-jits/build/release/)
+RSH=$(realpath "$1")
 export BENCHMARKS RSH
 
-make -j 48 -C $RSH
+cmake --build $RSH -j
 
 #---------------------
 
