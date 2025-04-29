@@ -24,15 +24,22 @@ STATS=$(realpath "$RESULT_FOLDER/stats.csv")
 STATS_ALL=$(realpath "$RESULT_FOLDER/stats_all.csv")
 export LOG STATS STATS_ALL
 
+
+#---------------------
+
+export STATS_CSV="$STATS"
+export STATS_ALL_CSV="$STATS_ALL"
+export PIR_OSR=0
+export PIR_WARMUP=10
+
+#---------------------
+
 function run {
   read folder benchmark arg <<< "$1"
 
   cd "$BENCHMARKS/$folder"
 
-  STATS_CSV="$STATS" STATS_ALL_CSV="$STATS_ALL" \
-    PIR_OSR=0 PIR_WARMUP=10 \
-    "$RSH/bin/Rscript" harness.r "$benchmark" 15 "$arg" \
-    2>&1 1>/dev/null
+  "$RSH/bin/Rscript" harness.r "$benchmark" 15 "$arg" 2>&1 1>/dev/null
 }
 
 export -f run
@@ -50,3 +57,8 @@ parallel -j 48 --bar run ::: \
   "RealThing flexclust_no_s4 5" \
   > "$LOG"
 
+pushd titanic/code > /dev/null
+
+STATS_NAME=kaggle:titanic "$RSH/bin/R" -q -f titanic.R 2>> "$LOG"
+
+popd > /dev/null
