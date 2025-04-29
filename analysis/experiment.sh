@@ -7,9 +7,10 @@ if [[ -z "$1" ]]; then
   exit 1
 fi
 
-BENCHMARKS=$(realpath ./Benchmarks)
-RSH=$(realpath "$1")
-export BENCHMARKS RSH
+export RSH=$(realpath "$1")
+
+export BENCHMARKS=$(realpath ./Benchmarks)
+export TITANIC=$(realpath ./titanic/code)
 
 cmake --build $RSH -j
 
@@ -19,27 +20,29 @@ RESULT_FOLDER=results
 rm -rf "$RESULT_FOLDER"
 mkdir -p "$RESULT_FOLDER"
 
-LOG=$(realpath "$RESULT_FOLDER/log")
-STATS=$(realpath "$RESULT_FOLDER/stats.csv")
-STATS_ALL=$(realpath "$RESULT_FOLDER/stats_all.csv")
-export LOG STATS STATS_ALL
-
-
-#---------------------
-
-export STATS_CSV="$STATS"
-export STATS_ALL_CSV="$STATS_ALL"
-export PIR_OSR=0
-export PIR_WARMUP=10
+export LOG=$(realpath "$RESULT_FOLDER/log")
+export STATS=$(realpath "$RESULT_FOLDER/stats.csv")
+export STATS_ALL=$(realpath "$RESULT_FOLDER/stats_all.csv")
 
 #---------------------
 
 function run {
-  read folder benchmark arg <<< "$1"
+  export STATS_CSV="$STATS"
+  export STATS_ALL_CSV="$STATS_ALL"
+  export PIR_OSR=0
+  export PIR_WARMUP=10
 
-  cd "$BENCHMARKS/$folder"
+  if [[ "$1" = "titanic" ]]; then
+    cd "$TITANIC"
 
-  "$RSH/bin/Rscript" harness.r "$benchmark" 15 "$arg" 2>&1 1>/dev/null
+    STATS_NAME=kaggle:titanic "$RSH/bin/R" -q -f titanic.R 2>&1 1> /dev/null
+  else
+    read folder benchmark arg <<< "$1"
+
+    cd "$BENCHMARKS/$folder"
+
+    "$RSH/bin/Rscript" harness.r "$benchmark" 15 "$arg" 2>&1 1>/dev/null
+  fi
 }
 
 export -f run
@@ -55,10 +58,6 @@ parallel -j 48 --bar run ::: \
   "shootout pidigits/pidigits 30" \
   "RealThing volcano 1" \
   "RealThing flexclust_no_s4 5" \
+  "titanic" \
   > "$LOG"
 
-pushd titanic/code > /dev/null
-
-STATS_NAME=kaggle:titanic "$RSH/bin/R" -q -f titanic.R 2>> "$LOG"
-
-popd > /dev/null
