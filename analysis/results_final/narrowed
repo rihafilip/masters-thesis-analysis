@@ -1,0 +1,36 @@
+2 
+checkFor: int$#-
+static: (int|real)$#-
+feedback: int$-
+expected: int$#-
+
+4 
+checkFor: int$-
+static: (int|real)$-
+feedback: int-
+expected: int$-
+
+2 
+checkFor: real-
+static: real+
+feedback: (lgl|str)-
+expected: -
+
+5 
+checkFor: val-
+static: val+
+feedback: val?-
+expected: val-
+
+2 
+checkFor: val?~+
+static: val?^
+feedback: val?+
+expected: val+
+
+2 
+checkFor: val?~-
+static: val?^
+feedback: val?-
+expected: val-
+

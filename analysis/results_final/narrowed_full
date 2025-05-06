@@ -1,0 +1,142 @@
+Type#60 <int$->
+(int|real)$#-   %32.0 = Phi                      0L:BB31, -1:BB57
+void                    Assume             D     %35.0, %32.2 (Typecheck@0x557a274c1bc0[Type#60])
+narrowed with static type: yes
+widened: no
+checkFor: int$#-, static: (int|real)$#-, feedback: int$-, expected: int$#-, required: val?^ | miss
+
+--
+Type#1 [polluted] <val?->
+val+            %1.3  = Force!<lazy>       !vr   %1.0,    <val?->
+void                    Assume             D     %1.4, %1.5 (Typecheck@0x560206faf720[Type#1])
+narrowed with static type: yes
+widened: no
+checkFor: val-, static: val+, feedback: val?-, expected: val-, required: val?+
+
+--
+Type#1 [polluted] <int->
+(int|real)$-    %1.11 = CallSafeBuiltin    wed   length(%1.7)    <int$->
+void                    Assume             D     %1.12, %1.14 (Typecheck@0x5616523fd3a0[Type#1])
+narrowed with static type: yes
+widened: no
+checkFor: int$-, static: (int|real)$-, feedback: int-, expected: int$-, required: val?+
+
+--
+Type#1 [polluted] <int->
+(int|real)$-    %2.6  = CallSafeBuiltin    wed   length(%2.3)    <int$->
+void                    Assume             D     %2.7, %2.9 (Typecheck@0x5616523fd3a0[Type#1])
+narrowed with static type: yes
+widened: no
+checkFor: int$-, static: (int|real)$-, feedback: int-, expected: int$-, required: val?+
+
+--
+Type#1 [polluted] <int->
+(int|real)$-    %2.6  = CallSafeBuiltin    wed   length(%2.3)    <int$->
+void                    Assume             D     %2.7, %2.9 (Typecheck@0x5616523fd3a0[Type#1])
+narrowed with static type: yes
+widened: no
+checkFor: int$-, static: (int|real)$-, feedback: int-, expected: int$-, required: val?+
+
+--
+Type#1 [polluted] <int->
+(int|real)$-    %2.6  = CallSafeBuiltin    wed   length(%2.3)    <int$->
+void                    Assume             D     %2.7, %2.9 (Typecheck@0x5616523fd3a0[Type#1])
+narrowed with static type: yes
+widened: no
+checkFor: int$-, static: (int|real)$-, feedback: int-, expected: int$-, required: val?+
+
+--
+Type#4 [polluted] <val?->
+val?^           %1.0  = LdArg                    0
+void                    Assume             D     %3.0, %1.3 (Typecheck2@0x56168c58e6e0[Type#4])
+narrowed with static type: yes
+widened: yes
+checkFor: val?~-, static: val?^, feedback: val?-, expected: val-, required: val?+
+(hoisted force)
+--
+Type#4 [polluted] <val?+>
+val?^           %1.0  = LdArg                    0
+void                    Assume             D     %3.0, %1.4 (Typecheck2@0x56168c58e6e0[Type#4])
+narrowed with static type: yes
+widened: yes
+checkFor: val?~+, static: val?^, feedback: val?+, expected: val+, required: val?+
+(hoisted force)
+--
+Type#5 [polluted] <val?->
+val+            %1.3  = Force!<lazy>             %1.2,    <val?->
+void                    Assume             D     %1.4, %1.5 (Typecheck@0x561652c43be0[Type#5])
+narrowed with static type: yes
+widened: no
+checkFor: val-, static: val+, feedback: val?-, expected: val-, required: val?^ | miss
+
+--
+Type#0 [polluted] <(lgl|str)->
+real+           %20.2 = Mul                wed   %20.1, 255, elided   <real+>
+void                    Assume             D     %38.2, %36.6 (Typecheck@0x56166ab02320[Type#0])
+narrowed with static type: yes
+widened: yes
+checkFor: real-, static: real+, feedback: (lgl|str)-, expected: -, required: val?+
+
+--
+Type#0 [polluted] <(lgl|str)->
+real+           %20.2 = Mul                wed   %20.1, 255, elided   <real+>
+void                    Assume             D     %38.2, %36.6 (Typecheck@0x56166ab02320[Type#0])
+narrowed with static type: yes
+widened: yes
+checkFor: real-, static: real+, feedback: (lgl|str)-, expected: -, required: val?+
+
+--
+Type#6 [polluted] <val?->
+val+            %8.2  = Force!<lazy>       !vr   %1.2,    <val?->
+void                    Assume             D     %14.0, %12.4 (Typecheck@0x56169db86ec0[Type#6])
+narrowed with static type: yes
+widened: no
+checkFor: val-, static: val+, feedback: val?-, expected: val-, required: val?+
+
+--
+Type#13 [polluted] <val?->
+val+            %10.3 = Force!<wrapped>    !vr   %1.2,    <val?->
+void                    Assume             D     %10.6, %10.7 (Typecheck@0x56169db86ec0[Type#13])
+narrowed with static type: yes
+widened: no
+checkFor: val-, static: val+, feedback: val?-, expected: val-, required: val?+
+
+--
+Type#4 [polluted] <val?+>
+val?^           %1.0  = LdArg                    0
+void                    Assume             D     %5.0, %2.3 (Typecheck2@0x56168c58e6e0[Type#4])
+narrowed with static type: yes
+widened: yes
+checkFor: val?~+, static: val?^, feedback: val?+, expected: val+, required: val?+
+(hoisted force)
+--
+Type#8 [polluted] <val?->
+val?^           %38.9 = CastType                 up %38.3
+void                    Assume             D     %99.0, %40.3 (Typecheck2@0x5616923fb770[Type#8])
+narrowed with static type: yes
+widened: yes
+checkFor: val?~-, static: val?^, feedback: val?-, expected: val-, required: val?+
+(hoisted force)
+--
+Type#8 [polluted] <val?->
+val+            %1.4  = Force!<lazy>       !vr   %1.2,    <val?->
+void                    Assume             D     %44.4, %44.6 (Typecheck@0x5616923fb770[Type#8])
+narrowed with static type: yes
+widened: no
+checkFor: val-, static: val+, feedback: val?-, expected: val-, required: val?+
+
+--
+Type#246 <int$->
+(int|real)$#-   %117.2 = ColonCastLhs       e     %110.13   <int$->
+void                    Assume             D     %117.7, %114.4 (Typecheck@0x5616b41f5910[Type#246])
+narrowed with static type: yes
+widened: no
+checkFor: int$#-, static: (int|real)$#-, feedback: int$-, expected: int$#-, required: val?^ | miss
+
+Type#247 <int$->
+(int|real)$#-   %117.3 = ColonCastRhs       e     %117.2, %114.2   <int$->
+void                    Assume             D     %117.8, %114.4 (Typecheck@0x5616b41f5910[Type#247])
+narrowed with static type: yes
+widened: no
+checkFor: int$#-, static: (int|real)$#-, feedback: int$-, expected: int$#-, required: val?^ | miss
+

@@ -6,4 +6,4 @@ fi
 
 source .venv/bin/activate
 
-pip install pandas numpy matplotlib ipykernel
+pip install pandas numpy matplotlib jinja2 ipykernel

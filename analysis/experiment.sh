@@ -21,14 +21,13 @@ rm -rf "$RESULT_FOLDER"
 mkdir -p "$RESULT_FOLDER"
 
 export LOG=$(realpath "$RESULT_FOLDER/log")
-export STATS=$(realpath "$RESULT_FOLDER/stats.csv")
-export STATS_ALL=$(realpath "$RESULT_FOLDER/stats_all.csv")
+export STATS_CSV=$(realpath "$RESULT_FOLDER/stats.csv")
+export STATS_ALL_CSV=$(realpath "$RESULT_FOLDER/stats_all.csv")
+export STATS_BY_SLOTS=$(realpath "$RESULT_FOLDER/stats_by_slots.csv")
 
 #---------------------
 
 function run {
-  export STATS_CSV="$STATS"
-  export STATS_ALL_CSV="$STATS_ALL"
   export PIR_OSR=0
   export PIR_WARMUP=10
 
@@ -61,3 +60,4 @@ parallel -j 48 --bar run ::: \
   "titanic" \
   > "$LOG"
 
+./narrowed.sh
