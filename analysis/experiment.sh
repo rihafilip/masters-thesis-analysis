@@ -60,4 +60,3 @@ parallel -j 48 --bar run ::: \
   "titanic" \
   > "$LOG"
 
-./narrowed.sh
